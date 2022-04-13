@@ -11,6 +11,9 @@ icon = pygame.image.load('icon.png')
 pygame.display.set_icon(icon)
 background = pygame.image.load('background.png')
 
+# font
+font = pygame.font.Font('freesansbold.ttf', 32)
+
 player = 1
 
 board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -22,6 +25,16 @@ x = 0
 y = 0
 
 win = 0
+
+
+def show_player_turn():
+    global player
+    if player == 1:
+        text_player_turn = font.render('Player1 Turn', True, (27, 140, 60))
+        screen.blit(text_player_turn, (301, 16))
+    elif player == 2:
+        text_player_turn = font.render('Player2 Turn', True, (3, 17, 138))
+        screen.blit(text_player_turn, (301, 16))
 
 
 def check(a, b):
@@ -86,4 +99,5 @@ while running:
             mouse_input(130, 410, 3, 1)
             mouse_input(310, 410, 3, 2)
             mouse_input(490, 410, 3, 3)
+    show_player_turn()
     pygame.display.update()
