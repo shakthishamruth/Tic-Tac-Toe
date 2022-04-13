@@ -1,3 +1,4 @@
+# pip install pygame
 import pygame
 import random
 
@@ -46,14 +47,22 @@ def mouse_input(x1, y1, a, b):
 
 
 def check_win():
-    global board
+    global board, win
     for i in range(3):
-        if board[i][0] == board[i][1] == board[i][2]:
+        if board[i][0] == board[i][1] and board[i][1] == board[i][2] and board[i][0] != 0:
             win = board[i][0]
-        if board[0][i] == board[1][i] == board[2][i]:
+        if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] != 0:
             win = board[0][i]
-        if board[0][i] == board[1][i] == board[2][i]:
-            win = board[0][i]
+    if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] != 0:
+        win = board[0][0]
+    if board[2][0] == board[2][2] and board[2][2] == board[0][2] and board[2][0] != 0:
+        win = board[2][0]
+    if win != 0:
+        print('player' + str(win) + ' won')
+        for i in range(3):
+            for j in range(3):
+                board[i][j] = 0
+        win = 0
 
 
 # Program loop
@@ -76,4 +85,5 @@ while running:
             mouse_input(130, 410, 3, 1)
             mouse_input(310, 410, 3, 2)
             mouse_input(490, 410, 3, 3)
+    check_win()
     pygame.display.update()
