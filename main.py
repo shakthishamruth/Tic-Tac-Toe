@@ -35,17 +35,6 @@ def check(a, b):
             player = 1
 
 
-def mouse_input(x1, y1, a, b):
-    global x, y, player, p, board
-    x2 = x1 + 180
-    y2 = y1 + 180
-    if x1 < x < x2 and y1 < y < y2:
-        if player == 1:
-            check(a, b)
-        elif player == 2:
-            check(a, b)
-
-
 def check_win():
     global board, win
     for i in range(3):
@@ -63,6 +52,18 @@ def check_win():
             for j in range(3):
                 board[i][j] = 0
         win = 0
+
+
+def mouse_input(x1, y1, a, b):
+    global x, y, player, p, board
+    x2 = x1 + 180
+    y2 = y1 + 180
+    if x1 < x < x2 and y1 < y < y2:
+        if player == 1:
+            check(a, b)
+        elif player == 2:
+            check(a, b)
+    check_win()
 
 
 # Program loop
@@ -85,5 +86,4 @@ while running:
             mouse_input(130, 410, 3, 1)
             mouse_input(310, 410, 3, 2)
             mouse_input(490, 410, 3, 3)
-    check_win()
     pygame.display.update()
