@@ -18,7 +18,7 @@ player = 1
 
 board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
-player1Score = 0
+player1score = 0
 player2score = 0
 
 x = 0
@@ -27,14 +27,18 @@ y = 0
 win = 0
 
 
-def show_player_turn():
-    global player
+def show_player_turn_score():
+    global player, player1score, player2score
     if player == 1:
         text_player_turn = font.render('Player1 Turn', True, (27, 140, 60))
         screen.blit(text_player_turn, (301, 16))
     elif player == 2:
         text_player_turn = font.render('Player2 Turn', True, (3, 17, 138))
         screen.blit(text_player_turn, (301, 16))
+    text_player1_score = font.render(str(player1score), True, (27, 140, 60))
+    screen.blit(text_player1_score, (85, 311))
+    text_player2_score = font.render(str(player2score), True, (3, 17, 138))
+    screen.blit(text_player2_score, (751, 311))
 
 
 def check(a, b):
@@ -49,22 +53,34 @@ def check(a, b):
 
 
 def check_win():
-    global board, win
+    global board, win, player1score, player2score
     for i in range(3):
         if board[i][0] == board[i][1] and board[i][1] == board[i][2] and board[i][0] != 0:
             win = board[i][0]
-        if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] != 0:
+        elif board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] != 0:
             win = board[0][i]
     if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] != 0:
         win = board[0][0]
     if board[2][0] == board[2][2] and board[2][2] == board[0][2] and board[2][0] != 0:
         win = board[2][0]
     if win != 0:
+        if win == 1:
+            player1score += 1
+        elif win == 2:
+            player2score += 1
         print('player' + str(win) + ' won')
         for i in range(3):
             for j in range(3):
                 board[i][j] = 0
         win = 0
+    else:
+        draw_cont = 0
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] != 0:
+                    draw_cont += 1
+        if draw_cont == 9:
+            print('DRAW')
 
 
 def mouse_input(x1, y1, a, b):
@@ -99,5 +115,5 @@ while running:
             mouse_input(130, 410, 3, 1)
             mouse_input(310, 410, 3, 2)
             mouse_input(490, 410, 3, 3)
-    show_player_turn()
+    show_player_turn_score()
     pygame.display.update()
