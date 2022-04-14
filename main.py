@@ -1,6 +1,5 @@
 # pip install pygame
 import pygame
-import random
 
 pygame.init()
 
@@ -81,6 +80,10 @@ def check_win():
                     draw_cont += 1
         if draw_cont == 9:
             print('DRAW')
+            for i in range(3):
+                for j in range(3):
+                    board[i][j] = 0
+            win = 0
 
 
 def mouse_input(x1, y1, a, b):
