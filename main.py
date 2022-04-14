@@ -16,6 +16,7 @@ font = pygame.font.Font('freesansbold.ttf', 32)
 player = 1
 
 board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+xo = [['', '', ''], ['', '', ''], ['', '', '']]
 
 player1score = 0
 player2score = 0
@@ -87,16 +88,22 @@ def check_win():
 
 
 def mouse_input(x1, y1, a, b):
-    global x, y, player, p, board
+    global x, y, player, p, board, xo
     x2 = x1 + 180
     y2 = y1 + 180
     if x1 < x < x2 and y1 < y < y2:
         if player == 1:
             check(a, b)
+            xo[a][b] = 'X'
         elif player == 2:
             check(a, b)
+            xo[a][b] = 'Y'
     check_win()
 
+
+def showXO(cordx, cordy, a, b):
+    if xo[a][b] == 'X':
+        
 
 # Program loop
 running = True
