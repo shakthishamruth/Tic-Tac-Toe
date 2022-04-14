@@ -12,6 +12,7 @@ background = pygame.image.load('background.png')
 
 # font
 font = pygame.font.Font('freesansbold.ttf', 32)
+font2 = pygame.font.Font('freesansbold.ttf', 128)
 
 player = 1
 
@@ -48,8 +49,10 @@ def check(a, b):
         print(board)
         if player == 1:
             player = 2
+            xo[a - 1][b - 1] = 'X'
         elif player == 2:
             player = 1
+            xo[a - 1][b - 1] = 'O'
 
 
 def check_win():
@@ -72,6 +75,7 @@ def check_win():
         for i in range(3):
             for j in range(3):
                 board[i][j] = 0
+                xo[i][j] = ''
         win = 0
     else:
         draw_cont = 0
@@ -84,6 +88,7 @@ def check_win():
             for i in range(3):
                 for j in range(3):
                     board[i][j] = 0
+                    xo[i][j] = ''
             win = 0
 
 
@@ -94,16 +99,22 @@ def mouse_input(x1, y1, a, b):
     if x1 < x < x2 and y1 < y < y2:
         if player == 1:
             check(a, b)
-            xo[a][b] = 'X'
         elif player == 2:
             check(a, b)
-            xo[a][b] = 'Y'
     check_win()
 
 
 def showXO(cordx, cordy, a, b):
-    if xo[a][b] == 'X':
-        
+    if xo[a - 1][b - 1] == 'X':
+        textX = font2.render('X', True, (27, 140, 60))
+        screen.blit(textX, (cordx + 44, cordy + 38))
+    elif xo[a - 1][b - 1] == 'O':
+        text_player_turn = font2.render('O', True, (3, 17, 138))
+        screen.blit(text_player_turn, (cordx + 44, cordy + 38))
+    elif xo[a - 1][b - 1] == '':
+        text_ = font2.render('', True, (255, 255, 255))
+        screen.blit(text_, (cordx + 44, cordy + 38))
+
 
 # Program loop
 running = True
@@ -125,5 +136,14 @@ while running:
             mouse_input(130, 410, 3, 1)
             mouse_input(310, 410, 3, 2)
             mouse_input(490, 410, 3, 3)
+    showXO(130, 50, 1, 1)
+    showXO(310, 50, 1, 2)
+    showXO(490, 50, 1, 3)
+    showXO(130, 230, 2, 1)
+    showXO(310, 230, 2, 2)
+    showXO(490, 230, 2, 3)
+    showXO(130, 410, 3, 1)
+    showXO(310, 410, 3, 2)
+    showXO(490, 410, 3, 3)
     show_player_turn_score()
     pygame.display.update()
