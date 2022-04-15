@@ -1,7 +1,7 @@
 # XO_Game
-A XO game made in python
+A XO game made in python.
 
-This project uses pygame so make sure you have pygame package installed
+This project uses pygame so make sure you have pygame package installed.
 
-To install pygame
+To install pygame - 
 `pip install pygame`
