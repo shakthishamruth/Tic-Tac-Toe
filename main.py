@@ -1,17 +1,16 @@
 # pip install pygame
 import pygame
-import time
 
 pygame.init()
 
 # Window
 screen = pygame.display.set_mode((800, 675))
-pygame.display.set_caption('XO')
+pygame.display.set_caption('XO_Game')
 icon = pygame.image.load('icon.png')
 pygame.display.set_icon(icon)
 background = pygame.image.load('background.png')
 
-# font
+# Font
 font = pygame.font.Font('freesansbold.ttf', 32)
 font2 = pygame.font.Font('freesansbold.ttf', 128)
 
@@ -30,8 +29,10 @@ win = 0
 winner = ''
 
 reset = False
+running = True
 
 
+# Functions
 def show_player_turn_score():
     global player, player1score, player2score
     if player == 1:
@@ -46,44 +47,25 @@ def show_player_turn_score():
     screen.blit(text_player2_score, (751, 311))
 
 
-'''def reset(t):
-    global board, xo, win
-    win = 0
-    while t:
-        mins, secs = divmod(t, 60)
-        timer = '{:02d}:{:02d}'.format(mins, secs)
-        time.sleep(1)
-        t -= 1
-    for i in range(3):
-        for j in range(3):
-            board[i][j] = 0
-            xo[i][j] = ''
-'''
-
-
 def mouse_input_reset(x1, y1):
-    global x, y, player, board, xo, win
+    global x, y, board, xo, win, reset
     x2 = x1 + 50
     y2 = y1 + 50
     if x1 < x < x2 and y1 < y < y2:
         win = 0
         t = 1
-        while t:
-            mins, secs = divmod(t, 60)
-            timer = '{:02d}:{:02d}'.format(mins, secs)
-            time.sleep(1)
-            t -= 1
         for i in range(3):
             for j in range(3):
                 board[i][j] = 0
                 xo[i][j] = ''
+        win = 0
+        reset = False
 
 
 def check(a, b):
     global board, player
     if board[a - 1][b - 1] == 0:
         board[a - 1][b - 1] = player
-        print(board)
         if player == 1:
             player = 2
             xo[a - 1][b - 1] = 'X'
@@ -101,7 +83,7 @@ def check_win():
             win = board[0][i]
     if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] != 0:
         win = board[0][0]
-    if board[2][0] == board[2][2] and board[2][2] == board[0][2] and board[2][0] != 0:
+    if board[2][0] == board[1][1] and board[1][1] == board[0][2] and board[2][0] != 0:
         win = board[2][0]
     if win != 0:
         if win == 1:
@@ -110,9 +92,7 @@ def check_win():
         if win == 2:
             player2score += 1
             winner = 'Player2 wins'
-        print('player' + str(win) + ' won')
         reset = True
-
     else:
         draw_cont = 0
         for i in range(3):
@@ -120,8 +100,7 @@ def check_win():
                 if board[i][j] != 0:
                     draw_cont += 1
         if draw_cont == 9:
-            print('DRAW')
-            winner = 'DRAW'
+            winner = '     DRAW'
             reset = True
 
 
@@ -152,20 +131,19 @@ def showXO(cordx, cordy, a, b):
         screen.blit(textX, (cordx + 44, cordy + 38))
     elif xo[a - 1][b - 1] == 'O':
         text_player_turn = font2.render('O', True, (3, 17, 138))
-        screen.blit(text_player_turn, (cordx + 44, cordy + 38))
+        screen.blit(text_player_turn, (cordx + 40, cordy + 38))
     elif xo[a - 1][b - 1] == '':
         text_ = font2.render('', True, (255, 255, 255))
         screen.blit(text_, (cordx + 44, cordy + 38))
 
 
-def showwinner():
+def show_winner():
     global winner
     textX = font.render(winner, True, (0, 0, 0))
-    screen.blit(textX, (310 + 44, 500 + 38))
+    screen.blit(textX, (300, 600))
 
 
-# Program loop
-running = True
+# Main loop
 while running:
     screen.fill((0, 0, 0))
     screen.blit(background, (0, 0))
@@ -194,6 +172,6 @@ while running:
     showXO(130, 410, 3, 1)
     showXO(310, 410, 3, 2)
     showXO(490, 410, 3, 3)
-    showwinner()
+    show_winner()
     show_player_turn_score()
     pygame.display.update()
