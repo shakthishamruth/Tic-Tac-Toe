@@ -81,10 +81,31 @@ def check_win():
             if win == 1:
                 xo[i][0] = 'x'
                 xo[i][1] = 'x'
+                xo[i][2] = 'x'
+            elif win == 2:
+                xo[i][0] = 'o'
+                xo[i][1] = 'o'
+                xo[i][2] = 'o'
         if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] != 0:
             win = board[0][i]
+            if win == 1:
+                xo[0][i] = 'x'
+                xo[1][i] = 'x'
+                xo[2][i] = 'x'
+            elif win == 2:
+                xo[0][i] = 'o'
+                xo[1][i] = 'o'
+                xo[2][i] = 'o'
     if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] != 0:
         win = board[0][0]
+        if win == 1:
+            xo[0][0] = 'x'
+            xo[1][1] = 'x'
+            xo[2][2] = 'x'
+        elif win == 2:
+            xo[0][0] = 'o'
+            xo[1][1] = 'o'
+            xo[2][2] = 'o'
     if board[2][0] == board[1][1] and board[1][1] == board[0][2] and board[2][0] != 0:
         win = board[2][0]
     if win != 0:
