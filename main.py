@@ -1,5 +1,4 @@
 import pygame
-
 pygame.init()
 
 # Window
@@ -78,12 +77,44 @@ def check_win():
     for i in range(3):
         if board[i][0] == board[i][1] and board[i][1] == board[i][2] and board[i][0] != 0:
             win = board[i][0]
+            if win == 1:
+                xo[i][0] = 'x'
+                xo[i][1] = 'x'
+                xo[i][2] = 'x'
+            elif win == 2:
+                xo[i][0] = 'o'
+                xo[i][1] = 'o'
+                xo[i][2] = 'o'
         if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] != 0:
             win = board[0][i]
+            if win == 1:
+                xo[0][i] = 'x'
+                xo[1][i] = 'x'
+                xo[2][i] = 'x'
+            elif win == 2:
+                xo[0][i] = 'o'
+                xo[1][i] = 'o'
+                xo[2][i] = 'o'
     if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] != 0:
         win = board[0][0]
+        if win == 1:
+            xo[0][0] = 'x'
+            xo[1][1] = 'x'
+            xo[2][2] = 'x'
+        elif win == 2:
+            xo[0][0] = 'o'
+            xo[1][1] = 'o'
+            xo[2][2] = 'o'
     if board[2][0] == board[1][1] and board[1][1] == board[0][2] and board[2][0] != 0:
         win = board[2][0]
+        if win == 1:
+            xo[2][0] = 'x'
+            xo[1][1] = 'x'
+            xo[0][2] = 'x'
+        elif win == 2:
+            xo[2][0] = 'o'
+            xo[1][1] = 'o'
+            xo[0][2] = 'o'
     if win != 0:
         if win == 1:
             player1score += 1
@@ -134,6 +165,12 @@ def showXO(cordx, cordy, a, b):
     elif xo[a - 1][b - 1] == '':
         text_ = font2.render('', True, (255, 255, 255))
         screen.blit(text_, (cordx + 44, cordy + 38))
+    elif xo[a - 1][b - 1] == 'x':
+        textX = font2.render('X', True, (255, 0, 0))
+        screen.blit(textX, (cordx + 44, cordy + 38))
+    elif xo[a - 1][b - 1] == 'o':
+        text_player_turn = font2.render('O', True, (255, 0, 0))
+        screen.blit(text_player_turn, (cordx + 40, cordy + 38))
 
 
 def show_winner():
