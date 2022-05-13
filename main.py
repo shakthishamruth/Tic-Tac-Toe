@@ -78,6 +78,9 @@ def check_win():
     for i in range(3):
         if board[i][0] == board[i][1] and board[i][1] == board[i][2] and board[i][0] != 0:
             win = board[i][0]
+            if win == 1:
+                xo[i][0] = 'x'
+                xo[i][1] = 'x'
         if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] != 0:
             win = board[0][i]
     if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] != 0:
