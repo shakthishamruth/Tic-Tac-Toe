@@ -142,7 +142,6 @@ def show_winner():
     screen.blit(textX, (300, 600))
 
 
-
 # Main loop
 while running:
     screen.fill((0, 0, 0))
