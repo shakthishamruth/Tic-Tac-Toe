@@ -134,6 +134,12 @@ def showXO(cordx, cordy, a, b):
     elif xo[a - 1][b - 1] == '':
         text_ = font2.render('', True, (255, 255, 255))
         screen.blit(text_, (cordx + 44, cordy + 38))
+    elif xo[a - 1][b - 1] == 'x':
+        textX = font2.render('X', True, (255, 0, 0))
+        screen.blit(textX, (cordx + 44, cordy + 38))
+    elif x0[a - 1][b - 1] == 'o':
+        text_player_turn = font2.render('O', True, (255, 0, 0))
+        screen.blit(text_player_turn, (cordx + 40, cordy + 38))
 
 
 def show_winner():
