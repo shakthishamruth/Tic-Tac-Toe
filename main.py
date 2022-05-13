@@ -108,6 +108,14 @@ def check_win():
             xo[2][2] = 'o'
     if board[2][0] == board[1][1] and board[1][1] == board[0][2] and board[2][0] != 0:
         win = board[2][0]
+        if win == 1:
+            xo[2][0] = 'x'
+            xo[1][1] = 'x'
+            xo[0][2] = 'x'
+        elif win == 2:
+            xo[2][0] = 'o'
+            xo[1][1] = 'o'
+            xo[0][2] = 'o'
     if win != 0:
         if win == 1:
             player1score += 1
@@ -161,7 +169,7 @@ def showXO(cordx, cordy, a, b):
     elif xo[a - 1][b - 1] == 'x':
         textX = font2.render('X', True, (255, 0, 0))
         screen.blit(textX, (cordx + 44, cordy + 38))
-    elif x0[a - 1][b - 1] == 'o':
+    elif xo[a - 1][b - 1] == 'o':
         text_player_turn = font2.render('O', True, (255, 0, 0))
         screen.blit(text_player_turn, (cordx + 40, cordy + 38))
 
